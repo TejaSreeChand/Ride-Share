@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "758409662083",
+    "firebase_url": "https://rideshare-teja.firebaseio.com",
+    "project_id": "rideshare-teja",
+    "storage_bucket": "rideshare-teja.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758409662083:android:e1c49a78ea67eeb59f55b6",
+        "android_client_info": {
+          "package_name": "com.sathyabama.finalyear.rideshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758409662083-ls1d6ngt8flas6lkl06555bfe5f91lou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sathyabama.finalyear.rideshare",
+            "certificate_hash": "c6072a82e7ea8502f7ec8c2a325c3c3dc6720319"
+          }
+        },
+        {
+          "client_id": "758409662083-cq9k61b6nnjgr80rneb698mbl8b4k7ig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8pfmvCtbDPsaG3Y4ekM1WWKXRVrBOX-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758409662083-cq9k61b6nnjgr80rneb698mbl8b4k7ig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758409662083:android:c675b79563674e019f55b6",
+        "android_client_info": {
+          "package_name": "com.sathyabama.finalyear.rideshareapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758409662083-s4gegf8ohrj73ofra8s2d51tjhor9ogs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sathyabama.finalyear.rideshareapp",
+            "certificate_hash": "c6072a82e7ea8502f7ec8c2a325c3c3dc6720319"
+          }
+        },
+        {
+          "client_id": "758409662083-cq9k61b6nnjgr80rneb698mbl8b4k7ig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8pfmvCtbDPsaG3Y4ekM1WWKXRVrBOX-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758409662083-cq9k61b6nnjgr80rneb698mbl8b4k7ig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
