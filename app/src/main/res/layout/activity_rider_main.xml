@@ -81,7 +81,7 @@
         android:textColor="@android:color/holo_blue_dark"
         android:textStyle="bold" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -90,5 +90,5 @@
         android:layout_alignParentTop="true">
 
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

@@ -8,7 +8,7 @@ package com.sathyabama.finalyear.rideshareapp;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdate;
