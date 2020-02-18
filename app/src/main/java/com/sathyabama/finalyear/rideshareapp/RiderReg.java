@@ -1,34 +1,74 @@
 package com.sathyabama.finalyear.rideshareapp;
 
-/**
- * Created by asifsabir on 1/22/18.
- */
 
 public class RiderReg {
     public String fullName;
     public String password;
     public String mobile;
     public String email;
-    public String nid;
-    public String lat;
-    public String lon;
-    public String rating;
+    public String gender;
+    public String aadharNumber;
+    public String emergencyNumber;
 
     public RiderReg() {
-        // Default constructor required for calls to DataSnapshot.getValue(Article.class)
     }
 
-    public RiderReg(String fullName,String password,
-                     String mobile,String email, String nid,
-                     String lat, String lon,String rating) {
+    public RiderReg(String fullName, String password, String mobile, String email, String gender, String aadharNumber, String emergencyNumber) {
         this.fullName = fullName;
         this.password = password;
         this.mobile = mobile;
-        this.email=email;
-        this.nid = nid;
-        this.lat = lat;
-        this.lon = lon;
-        this.rating=rating;
+        this.email = email;
+        this.gender = gender;
+        this.aadharNumber = aadharNumber;
+        this.emergencyNumber = emergencyNumber;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAadharNumber() {
+        return aadharNumber;
+    }
+
+    public void setAadharNumber(String aadharNumber) {
+        this.aadharNumber = aadharNumber;
     }
 }
 

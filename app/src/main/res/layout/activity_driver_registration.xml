@@ -34,6 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:hint="Mobile (used for login)" />
+    <EditText
+        android:id="@+id/et_gender_driver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Gender"/>
 
     <EditText
         android:id="@+id/et_age"
@@ -42,19 +48,37 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:hint="Age" />
-    <EditText
-        android:id="@+id/et_nid"
-        android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:hint="NID" />
+
     <EditText
         android:id="@+id/et_vehicle_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:hint="Vehicle registration number" />
+    <EditText
+        android:id="@+id/et_lic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="License" />
+    <EditText
+        android:id="@+id/et_vehicle_maker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Vehicle maker" />
+    <EditText
+        android:id="@+id/et_aadhar_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Aadhar Number" />
+    <EditText
+        android:id="@+id/et_no_of_seats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Number of seats" />
 
     <RadioGroup
         android:id="@+id/radio"
@@ -67,30 +91,31 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select vehicle type:" />
+            android:textStyle="bold"
+            android:text="AC status:" />
 
         <RadioButton
-            android:id="@+id/radioMale"
+            android:id="@+id/hasAC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:checked="true"
-            android:text="Car" />
+            android:text="AC" />
 
         <RadioButton
-            android:id="@+id/radioFemale"
+            android:id="@+id/noAC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Bike" />
+            android:text="Non AC" />
 
     </RadioGroup>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_margin="16dp"
         android:text="Register"
         android:id="@+id/button_register_driver"
         android:textColor="@android:color/white"

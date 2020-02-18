@@ -114,11 +114,6 @@ public class ShowDriverRequest extends AppCompatActivity implements OnMapReadyCa
                 DriverReg driverReg = snapshot.getValue(DriverReg.class);
                 driverName = driverReg.fullName;
                 driverPhone = driverReg.mobile;
-                driverNid = driverReg.nid;
-                driverRating = driverReg.rating;
-
-                //setting on TextView
-
                 tvDriverName.setText(driverName);
                 tvDriverPhone.setText(driverPhone);
                 tvDriverNid.setText(driverNid);

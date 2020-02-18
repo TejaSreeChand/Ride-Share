@@ -15,9 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-/**
- * Created by asifsabir on 1/21/18.
- */
 
 public class DriverMainActivity extends AppCompatActivity {
     TextView tvFullName, tvEmail, tvMobile, tvAge, tvNid, tvRegistraion, tvType;
@@ -59,10 +56,10 @@ public class DriverMainActivity extends AppCompatActivity {
                 tvEmail.setText(driverReg.email);
                 tvMobile.setText(driverReg.mobile);
                 tvAge.setText(driverReg.age);
-                tvNid.setText(driverReg.nid);
+               // tvNid.setText(driverReg.nid);
                 tvRegistraion.setText(driverReg.regNo);
-                tvType.setText(driverReg.vehicleType);
-                ratingBar.setRating(Float.parseFloat(driverReg.rating));
+              //  tvType.setText(driverReg.vehicleType);
+              //  ratingBar.setRating(Float.parseFloat(driverReg.rating));
             }
 
             @Override

@@ -47,11 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.tvMobile.setText(driverDetails.mobile);
 
-        holder.tvNid.setText(driverDetails.nid);
-
         holder.tvReg.setText(driverDetails.regNo);
-        holder.rtDriver.setRating(Float.parseFloat(driverDetails.rating));
-        holder.tvType.setText(driverDetails.vehicleType);
 
 
     }

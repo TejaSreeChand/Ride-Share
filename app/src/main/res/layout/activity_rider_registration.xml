@@ -4,49 +4,70 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
+
     <EditText
         android:id="@+id/et_fullName"
-        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:hint="Full Name" />
+        android:hint="Full Name"
+        android:inputType="text" />
+
     <EditText
         android:id="@+id/et_email_rider"
-        android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:hint="Email" />
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
     <EditText
         android:id="@+id/et_password_rider"
-        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:hint="Password (used for login)" />
+        android:hint="Password (used for login)"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/et_gender_rider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Gender"
+        android:inputType="text" />
+
     <EditText
         android:id="@+id/et_mobile"
-        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:hint="Mobile Number (used for login)" />
+        android:hint="Mobile Number (used for login)"
+        android:inputType="number" />
+
     <EditText
-        android:id="@+id/et_nid"
-        android:inputType="number"
+        android:id="@+id/et_aadhar_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:hint="NID" />
+        android:hint="Aadhar Number"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/et_emergency_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Emergency Number"
+        android:inputType="number" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
         android:id="@+id/button_register_rider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:textColor="@android:color/white"
-        android:textAllCaps="false"/>
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

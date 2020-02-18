@@ -1,8 +1,5 @@
 package com.sathyabama.finalyear.rideshareapp;
 
-/**
- * Created by asifsabir on 1/22/18.
- */
 
 public class DriverReg {
     public String fullName;
@@ -10,32 +7,129 @@ public class DriverReg {
     public String password;
     public String mobile;
     public String age;
-    public String nid;
     public String regNo;
-    public String vehicleType;
-    public String lat;
-    public String lon;
-    public String rating;
+    public String maker;
+    public String acStatus;
+//    public String lat;
+//    public String lon;
+//    public String rating;
+    public String licNo;
+    public String aadharNum;
+    public String noOfSeats;
+    public String gender;
 
     public DriverReg() {
-        // Default constructor required for calls to DataSnapshot.getValue(Article.class)
     }
 
-    public DriverReg(String fullName, String email, String password,
-                     String mobile, String age, String nid,
-                     String regNo, String vehicleType, String lat,
-                     String lon, String rating) {
+    public DriverReg(String fullName, String email, String password, String mobile, String age, String regNo, String maker, String acStatus, String licNo, String aadharNum, String noOfSeats, String gender) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.mobile = mobile;
         this.age = age;
-        this.nid = nid;
         this.regNo = regNo;
-        this.vehicleType = vehicleType;
-        this.lat = lat;
-        this.lon = lon;
-        this.rating = rating;
+        this.maker = maker;
+        this.acStatus = acStatus;
+        this.licNo = licNo;
+        this.aadharNum = aadharNum;
+        this.noOfSeats = noOfSeats;
+        this.gender = gender;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getRegNo() {
+        return regNo;
+    }
+
+    public void setRegNo(String regNo) {
+        this.regNo = regNo;
+    }
+
+    public String getMaker() {
+        return maker;
+    }
+
+    public void setMaker(String maker) {
+        this.maker = maker;
+    }
+
+    public String getAcStatus() {
+        return acStatus;
+    }
+
+    public void setAcStatus(String acStatus) {
+        this.acStatus = acStatus;
+    }
+
+    public String getLicNo() {
+        return licNo;
+    }
+
+    public void setLicNo(String licNo) {
+        this.licNo = licNo;
+    }
+
+    public String getAadharNum() {
+        return aadharNum;
+    }
+
+    public void setAadharNum(String aadharNum) {
+        this.aadharNum = aadharNum;
+    }
+
+    public String getNoOfSeats() {
+        return noOfSeats;
+    }
+
+    public void setNoOfSeats(String noOfSeats) {
+        this.noOfSeats = noOfSeats;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
 

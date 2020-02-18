@@ -1,8 +1,5 @@
 package com.sathyabama.finalyear.rideshareapp;
 
-/**
- * Created by asifsabir on 1/21/18.
- */
 
 
 import android.annotation.SuppressLint;
@@ -27,7 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DriverRegistrationActivity extends AppCompatActivity {
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     Button registerButton;
-    EditText etName, etPhone, etEmail, etPassword, etAge, etNid, etVechicleNum;
+    EditText etName, etPhone, etEmail, etPassword, etAge, etVehicleNum;
+    EditText etMaker, etLic, etAadhar, etNoOfSeats, etGender;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
 
@@ -45,17 +43,21 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        etName = (EditText) findViewById(R.id.et_fullName);
-        etPassword = (EditText) findViewById(R.id.et_password);
-        etEmail = (EditText) findViewById(R.id.et_email);
-        etPhone = (EditText) findViewById(R.id.et_mobile);
-        etAge = (EditText) findViewById(R.id.et_age);
-        etNid = (EditText) findViewById(R.id.et_nid);
-        etVechicleNum = (EditText) findViewById(R.id.et_vehicle_no);
+        etName = findViewById(R.id.et_fullName);
+        etPassword = findViewById(R.id.et_password);
+        etEmail = findViewById(R.id.et_email);
+        etPhone = findViewById(R.id.et_mobile);
+        etAge = findViewById(R.id.et_age);
+        etVehicleNum = findViewById(R.id.et_vehicle_no);
+        etLic = findViewById(R.id.et_lic);
+        etAadhar = findViewById(R.id.et_aadhar_no);
+        etMaker = findViewById(R.id.et_vehicle_maker);
+        etNoOfSeats = findViewById(R.id.et_no_of_seats);
+        etGender = findViewById(R.id.et_gender_driver);
 
 
-        radioGroup = (RadioGroup) findViewById(R.id.radio);
-        registerButton = (Button) findViewById(R.id.button_register_driver);
+        radioGroup = findViewById(R.id.radio);
+        registerButton = findViewById(R.id.button_register_driver);
 
         //getting gps data
         gps = new GPSTracker(DriverRegistrationActivity.this);
@@ -78,17 +80,32 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fullName, password, email, phoneNumber, nid, age, vehicleNumber;
+                String fullName;
+                String email;
+                String password;
+                String phoneNumber;
+                String age;
+                String vehicleNumber;
+                String maker;
+                String acStatus;
+                String licNo;
+                String aadharNum;
+                String noOfSeats;
+                String gender;
 
                 fullName = etName.getText().toString().trim();
                 password = etPassword.getText().toString().trim();
                 email = etEmail.getText().toString().trim();
                 phoneNumber = etPhone.getText().toString().trim();
-                nid = etNid.getText().toString().trim();
                 age = etAge.getText().toString().trim();
-                vehicleNumber = etVechicleNum.getText().toString().trim();
+                vehicleNumber = etVehicleNum.getText().toString().trim();
+                maker = etMaker.getText().toString().trim();
+                licNo = etLic.getText().toString().trim();
+                aadharNum = etAadhar.getText().toString().trim();
+                noOfSeats = etNoOfSeats.getText().toString().trim();
+                gender = etGender.getText().toString().trim();
 
-                if (latOfSensor ==0) {
+                if (latOfSensor == 0) {
                     gps.showSettingsAlert();
                     Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
                     Log.e("Error", "location error1");
@@ -106,9 +123,8 @@ public class DriverRegistrationActivity extends AppCompatActivity {
                 String vehicleType = radioButton.getText().toString();
 
 
-
                 if (fullName.equals("") || password.equals("") || email.equals("") ||
-                        phoneNumber.equals("") || nid.equals("") ||
+                        phoneNumber.equals("")  ||
                         age.equals("") || vehicleNumber.equals("") ||
                         latitude.equals("") || longitude.equals("")) {
 
@@ -121,8 +137,7 @@ public class DriverRegistrationActivity extends AppCompatActivity {
                 } else {
                     DatabaseReference myRef = database.getReference("Driver").child(phoneNumber);
                     DriverReg driver = new DriverReg(fullName, email, password, phoneNumber, age,
-                            nid, vehicleNumber, vehicleType,
-                            latitude, longitude, "5");
+                            vehicleNumber, maker, "yes", licNo, aadharNum, noOfSeats, gender);
                     myRef.setValue(driver);
                     Toast.makeText(DriverRegistrationActivity.this, "Successful Registration", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(DriverRegistrationActivity.this, LoginScreenActivity.class));
@@ -142,8 +157,6 @@ public class DriverRegistrationActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -159,6 +172,7 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         }
 
     }
+
     public void locationThread() {
         gps = new GPSTracker(DriverRegistrationActivity.this);
 

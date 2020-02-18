@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,15 +17,12 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * Created by asifsabir on 1/21/18.
- */
 
 public class RiderRegistrationActivity extends AppCompatActivity {
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     Button registerButton;
-    EditText etName, etPhone, etPassword, etNid,etEmail;
+    EditText etName, etPhone, etPassword, etEmail, etAadhar, etGender, etEmergency;
 
     GPSTracker gps;
     double latOfSensor = 0, lonOfSensor = 0;
@@ -37,14 +36,15 @@ public class RiderRegistrationActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Rider Registration");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        etName = (EditText) findViewById(R.id.et_fullName);
-        etPassword = (EditText) findViewById(R.id.et_password_rider);
-        etEmail = (EditText) findViewById(R.id.et_email_rider);
-        etPhone = (EditText) findViewById(R.id.et_mobile);
-        etNid = (EditText) findViewById(R.id.et_nid);
-        registerButton = (Button) findViewById(R.id.button_register_rider);
+        etName = findViewById(R.id.et_fullName);
+        etPassword = findViewById(R.id.et_password_rider);
+        etEmail = findViewById(R.id.et_email_rider);
+        etPhone = findViewById(R.id.et_mobile);
+        etAadhar = findViewById(R.id.et_aadhar_no);
+        etEmergency = findViewById(R.id.et_emergency_no);
+        etGender = findViewById(R.id.et_gender_rider);
+        registerButton = findViewById(R.id.button_register_rider);
 
         //getting gps data
         gps = new GPSTracker(RiderRegistrationActivity.this);
@@ -55,28 +55,25 @@ public class RiderRegistrationActivity extends AppCompatActivity {
             latOfSensor = gps.getLatitude();
             lonOfSensor = gps.getLongitude();
 
-            //button enable kore dao
 
         } else {
-            // can't get location
-            // GPS or Network is not enabled
-            // Ask user to enable GPS/network in settings
             gps.showSettingsAlert();
         }
-
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fullName, password,phoneNumber,nid,email;
+                String fullName, password, phoneNumber, aadhar, email, gender, emergencyNumber;
 
                 fullName = etName.getText().toString().trim();
                 password = etPassword.getText().toString().trim();
                 phoneNumber = etPhone.getText().toString().trim();
-                nid = etNid.getText().toString().trim();
+                gender = etPhone.getText().toString().trim();
+                aadhar = etAadhar.getText().toString().trim();
+                emergencyNumber = etEmergency.getText().toString();
                 email = etEmail.getText().toString().trim();
-                if (latOfSensor ==0) {
+                if (latOfSensor == 0) {
                     gps.showSettingsAlert();
                     Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
                     Log.e("Error", "location error1");
@@ -87,7 +84,7 @@ public class RiderRegistrationActivity extends AppCompatActivity {
 
 
                 if (fullName.equals("") || password.equals("") ||
-                        phoneNumber.equals("") || nid.equals("") |
+                        phoneNumber.equals("") || gender.equals("") |
                         latitude.equals("") || longitude.equals("")) {
 
                     if (latitude.equals("") || longitude.equals("")) {
@@ -98,8 +95,8 @@ public class RiderRegistrationActivity extends AppCompatActivity {
 
                 } else {
                     DatabaseReference myRef = database.getReference("Rider").child(phoneNumber);
-                    RiderReg rider = new RiderReg(fullName, password, phoneNumber,email,
-                            nid,latitude, longitude,"5");
+                    RiderReg rider = new RiderReg(fullName, password, phoneNumber, email,
+                            gender, aadhar, emergencyNumber);
                     myRef.setValue(rider);
                     Toast.makeText(RiderRegistrationActivity.this, "Successful Registration", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RiderRegistrationActivity.this, LoginScreenActivity.class));
@@ -110,7 +107,6 @@ public class RiderRegistrationActivity extends AppCompatActivity {
         });
 
     }
-
 
 
     @Override
