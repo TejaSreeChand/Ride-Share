@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sathyabama.finalyear.rideshareapp">
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -33,6 +34,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.sathyabama.finalyear.rideshareapp.DriverMainActivity"/>
+        <activity android:name="com.sathyabama.finalyear.rideshareapp.map.SelectFromMapActivity"/>
+        <activity android:name="com.sathyabama.finalyear.rideshareapp.map.SelectToMapActivity"/>
         <activity android:name="com.sathyabama.finalyear.rideshareapp.DriverRegistrationActivity"/>
         <activity android:name="com.sathyabama.finalyear.rideshareapp.RiderMainAcitivity"/>
         <activity android:name="com.sathyabama.finalyear.rideshareapp.RiderRegistrationActivity"/>

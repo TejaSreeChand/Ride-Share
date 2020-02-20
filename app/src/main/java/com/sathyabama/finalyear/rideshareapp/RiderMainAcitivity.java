@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sathyabama.finalyear.rideshareapp.map.SelectFromMapActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class RiderMainAcitivity extends AppCompatActivity {
         setContentView(R.layout.activity_rider_main);
         tvRiderName = (TextView) findViewById(R.id.tv_rider_name);
         tvRiderMobile = (TextView) findViewById(R.id.tv_rider_mobile);
-        btnDriversMap = (Button) findViewById(R.id.button_see_map);
+       // btnDriversMap = (Button) findViewById(R.id.button_see_map);
         btnSendReq = (Button) findViewById(R.id.button_request_ride);
         //retrieving phone data
         final String riderName = getIntent().getExtras().getString("riderName", null);
@@ -56,20 +57,20 @@ public class RiderMainAcitivity extends AppCompatActivity {
         tvRiderName.setText(riderName);
         tvRiderMobile.setText(riderPhone);
 
-        btnDriversMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(RiderMainAcitivity.this, ShowDriversMap.class);
-                i.putExtra("riderName", riderName);
-                i.putExtra("riderPhone", riderPhone);
-                startActivity(i);
-                finish();
-            }
-        });
+//        btnDriversMap.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(RiderMainAcitivity.this, ShowDriversMap.class);
+//                i.putExtra("riderName", riderName);
+//                i.putExtra("riderPhone", riderPhone);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
         btnSendReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RiderMainAcitivity.this, MapsActivity.class);
+                Intent i = new Intent(RiderMainAcitivity.this, SelectFromMapActivity.class);
                 i.putExtra("riderName", riderName);
                 i.putExtra("riderPhone", riderPhone);
                 startActivity(i);

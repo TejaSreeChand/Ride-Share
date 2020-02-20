@@ -3,18 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
+    android:layout_gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="center"
+        android:padding="16dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rider name:"
+            android:text="Rider name: "
             android:textColor="@android:color/black" />
 
         <TextView
@@ -27,13 +29,14 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="center"
+        android:padding="16dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rider mobile:"
+            android:text="Rider mobile: "
             android:textColor="@android:color/black" />
 
         <TextView
@@ -48,16 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_see_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
-            android:drawablePadding="10dp"
-            android:drawableRight="@android:drawable/ic_dialog_map"
-            android:text="drivers map"
-            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/button_request_ride"

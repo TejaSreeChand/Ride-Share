@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.sathyabama.finalyear.rideshareapp.utils.PreferenceConfig;
 
 /**
  * Created by asifsabir on 1/21/18.
@@ -124,7 +125,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-
+                PreferenceConfig preferenceConfig = new PreferenceConfig(getApplicationContext());
                 if (user.equals("Rider")) {
                     RiderReg riderReg = snapshot.getValue(RiderReg.class);
 
@@ -134,6 +135,9 @@ public class LoginScreenActivity extends AppCompatActivity {
                         //sending data to rider activity
 
                         Intent i = new Intent(LoginScreenActivity.this, RiderMainAcitivity.class);
+                        preferenceConfig.writeLoginStatus(true);
+                        preferenceConfig.writePhoneNumber(riderReg.mobile);
+                        preferenceConfig.writeFullName(riderReg.fullName);
                         i.putExtra("riderName", riderReg.fullName);
                         i.putExtra("riderPhone", riderReg.mobile);
                         startActivity(i);
@@ -149,9 +153,11 @@ public class LoginScreenActivity extends AppCompatActivity {
                         Toast.makeText(LoginScreenActivity.this, "Welcome driver:" + driverReg.fullName, Toast.LENGTH_SHORT).show();
 
                         //sending data to driver activity
-
                         Intent i = new Intent(LoginScreenActivity.this, DriverMainActivity.class);
                         String driverPhone = driverReg.mobile;
+                        preferenceConfig.writeLoginStatus(true);
+                        preferenceConfig.writePhoneNumber(driverReg.mobile);
+                        preferenceConfig.writeFullName(driverReg.fullName);
                         i.putExtra("driverPhone", driverPhone);
                         startActivity(i);
                         finish();
