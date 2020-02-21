@@ -101,7 +101,7 @@ public class RiderMainAcitivity extends AppCompatActivity {
 
         //showing list view
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setHasFixedSize(true);
 

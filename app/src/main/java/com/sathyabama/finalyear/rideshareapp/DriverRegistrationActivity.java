@@ -29,9 +29,9 @@ public class DriverRegistrationActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton radioButton;
 
-    GPSTracker gps;
-    double latOfSensor = 0, lonOfSensor = 0;
-    String latitude = "", longitude = "";
+    //  GPSTracker gps;
+    //   double latOfSensor = 0, lonOfSensor = 0;
+    //  String latitude = "", longitude = "";
     final Handler ha = new Handler();
 
     @Override
@@ -60,22 +60,22 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.button_register_driver);
 
         //getting gps data
-        gps = new GPSTracker(DriverRegistrationActivity.this);
+        // gps = new GPSTracker(DriverRegistrationActivity.this);
 
         // check if GPS enabled
-        if (gps.canGetLocation() && gps.getLatitude() != 0) {
-
-            latOfSensor = gps.getLatitude();
-            lonOfSensor = gps.getLongitude();
-
-            //button enable kore dao
-
-        } else {
-            // can't get location
-            // GPS or Network is not enabled
-            // Ask user to enable GPS/network in settings
-            gps.showSettingsAlert();
-        }
+//        if (gps.canGetLocation() && gps.getLatitude() != 0) {
+//
+//            latOfSensor = gps.getLatitude();
+//            lonOfSensor = gps.getLongitude();
+//
+//            //button enable kore dao
+//
+//        } else {
+//            // can't get location
+//            // GPS or Network is not enabled
+//            // Ask user to enable GPS/network in settings
+//            gps.showSettingsAlert();
+//        }
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,14 +105,14 @@ public class DriverRegistrationActivity extends AppCompatActivity {
                 noOfSeats = etNoOfSeats.getText().toString().trim();
                 gender = etGender.getText().toString().trim();
 
-                if (latOfSensor == 0) {
-                    gps.showSettingsAlert();
-                    Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
-                    Log.e("Error", "location error1");
-                } else {
-                    latitude = String.valueOf(latOfSensor);
-                    longitude = String.valueOf(lonOfSensor);
-                }
+//                if (latOfSensor == 0) {
+//                    gps.showSettingsAlert();
+//                    Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
+//                    Log.e("Error", "location error1");
+//                } else {
+//                    latitude = String.valueOf(latOfSensor);
+//                    longitude = String.valueOf(lonOfSensor);
+//                }
 
                 // get selected radio button from radioGroup
                 int selectedId = radioGroup.getCheckedRadioButtonId();
@@ -124,15 +124,11 @@ public class DriverRegistrationActivity extends AppCompatActivity {
 
 
                 if (fullName.equals("") || password.equals("") || email.equals("") ||
-                        phoneNumber.equals("")  ||
-                        age.equals("") || vehicleNumber.equals("") ||
-                        latitude.equals("") || longitude.equals("")) {
+                        phoneNumber.equals("") ||
+                        age.equals("") || vehicleNumber.equals(""))
+                    {
 
-                    if (latitude.equals("") || longitude.equals("")) {
-                        Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_SHORT).show();
-                    }
+                      Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_SHORT).show();
 
                 } else {
                     DatabaseReference myRef = database.getReference("Driver").child(phoneNumber);
@@ -153,7 +149,7 @@ public class DriverRegistrationActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        locationThread();
+        //locationThread();
     }
 
 
@@ -172,38 +168,38 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         }
 
     }
+//
+//    public void locationThread() {
+//        gps = new GPSTracker(DriverRegistrationActivity.this);
+//
+//        ha.postDelayed(new Runnable() {
+//
+//            @SuppressLint("NewApi")
+//            @Override
+//            public void run() {
+//                //call function
+//                if (gps.getLocation() == null) {
+//                    gps.showSettingsAlert();
+//                } else {
+//
+//                    // check if GPS enabled
+//                    if (gps.canGetLocation() && gps.getLatitude() != 0) {
+//                        latOfSensor = gps.getLatitude();
+//                        lonOfSensor = gps.getLongitude();
+//                        Toast.makeText(getApplicationContext(), "Location found!", Toast.LENGTH_SHORT).show();
+//
+//                    } else {
+//                        // can't get location
+//                        // GPS or Network is not enabled
+//                        // Ask user to enable GPS/network in settings
+//                        gps.showSettingsAlert();
+//                    }
+//                    if (gps.getLatitude() == 0)
+//                        ha.postDelayed(this, 3000);
+//                }
+//            }
+//}
+//        }, 3000);
 
-    public void locationThread() {
-        gps = new GPSTracker(DriverRegistrationActivity.this);
 
-        ha.postDelayed(new Runnable() {
-
-            @SuppressLint("NewApi")
-            @Override
-            public void run() {
-                //call function
-                if (gps.getLocation() == null) {
-                    gps.showSettingsAlert();
-                } else {
-
-                    // check if GPS enabled
-                    if (gps.canGetLocation() && gps.getLatitude() != 0) {
-                        latOfSensor = gps.getLatitude();
-                        lonOfSensor = gps.getLongitude();
-                        Toast.makeText(getApplicationContext(), "Location found!", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        // can't get location
-                        // GPS or Network is not enabled
-                        // Ask user to enable GPS/network in settings
-                        gps.showSettingsAlert();
-                    }
-                    if (gps.getLatitude() == 0)
-                        ha.postDelayed(this, 3000);
-                }
-            }
-
-        }, 3000);
-
-    }
 }
