@@ -1,75 +1,83 @@
 package com.sathyabama.finalyear.rideshareapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
+import com.sathyabama.finalyear.rideshareapp.adapter.BookingRecyclerAdapter;
+import com.sathyabama.finalyear.rideshareapp.model.RideBookingModel;
+import com.sathyabama.finalyear.rideshareapp.utils.PreferenceConfig;
+
+import java.util.ArrayList;
 
 
 public class DriverMainActivity extends AppCompatActivity {
-    TextView tvFullName, tvEmail, tvMobile, tvAge, tvNid, tvRegistraion, tvType;
-    RatingBar ratingBar;
 
+    private RecyclerView bookingReqRV;
+    private ArrayList<RideBookingModel> bookingModelArrayList = new ArrayList<>();
+    private FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main);
-        FirebaseMessaging.getInstance().subscribeToTopic("driver");
+        floatingActionButton = findViewById(R.id.driverMainFAB);
+        bookingReqRV = findViewById(R.id.driverBookedRecyclerView);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        final PreferenceConfig preferenceConfig = new PreferenceConfig(getApplicationContext());
 
-        tvFullName = (TextView) findViewById(R.id.tv_driver_name);
-        tvEmail = (TextView) findViewById(R.id.tv_driver_email);
-        tvMobile = (TextView) findViewById(R.id.tv_driver_mobile);
-        tvAge = (TextView) findViewById(R.id.tv_driver_age);
-        tvNid = (TextView) findViewById(R.id.tv_driver_nid);
-        tvRegistraion = (TextView) findViewById(R.id.tv_driver_registration);
-        tvType = (TextView) findViewById(R.id.tv_driver_vehicle_type);
-        ratingBar = (RatingBar) findViewById(R.id.rt_bar);
-//retrieving phone data
-        String driverPhone = getIntent().getExtras().getString("driverPhone", null);
-
-        //saving driver data
-        SharedPreferences.Editor editor = getSharedPreferences("driverData", MODE_PRIVATE).edit();
-        editor.putLong("driverPhone",Long.parseLong(driverPhone));
-        editor.apply();
-//rendering  driver data
-
-
-        final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Driver").child(driverPhone);
-        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//        DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("Driver").child(preferenceConfig.readPhoneNumber());
+//        driverRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                preferenceConfig.writeUPIId(dataSnapshot.child("upi").getValue());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Driver").child(preferenceConfig.readPhoneNumber()).child("currentBookings");
+        databaseReference.keepSynced(true);
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-
-                DriverReg driverReg = snapshot.getValue(DriverReg.class);
-
-                tvFullName.setText(driverReg.fullName);
-                tvEmail.setText(driverReg.email);
-                tvMobile.setText(driverReg.mobile);
-                tvAge.setText(driverReg.age);
-               // tvNid.setText(driverReg.nid);
-                tvRegistraion.setText(driverReg.regNo);
-              //  tvType.setText(driverReg.vehicleType);
-              //  ratingBar.setRating(Float.parseFloat(driverReg.rating));
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot booking : dataSnapshot.getChildren()) {
+                    bookingModelArrayList.add(booking.getValue(RideBookingModel.class));
+                }
+                if (bookingModelArrayList.size() != 0) {
+                    BookingRecyclerAdapter adapter = new BookingRecyclerAdapter(bookingModelArrayList, getApplicationContext());
+                    bookingReqRV.setAdapter(adapter);
+                    bookingReqRV.setLayoutManager(linearLayoutManager);
+                }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(DriverMainActivity.this, "Error happened in fetching user data!", Toast.LENGTH_SHORT).show();
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
         });
-
-
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),AvailableRides.class));
+            }
+        });
     }
 
 

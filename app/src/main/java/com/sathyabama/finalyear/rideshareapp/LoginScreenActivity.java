@@ -21,12 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.sathyabama.finalyear.rideshareapp.utils.PreferenceConfig;
 
-/**
- * Created by asifsabir on 1/21/18.
- */
 
 
 public class LoginScreenActivity extends AppCompatActivity {
@@ -41,14 +37,27 @@ public class LoginScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-        riderRegBtn = (Button) findViewById(R.id.button_rider_reg);
-        driverRegBtn = (Button) findViewById(R.id.button_driver_reg);
+        riderRegBtn =  findViewById(R.id.button_rider_reg);
+        driverRegBtn =  findViewById(R.id.button_driver_reg);
         etPhone = (EditText) findViewById(R.id.et_phone_login);
         etPassword = (EditText) findViewById(R.id.et_password_login);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
 
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("driver");
-
+        PreferenceConfig preferenceConfig = new PreferenceConfig(getApplicationContext());
+        if(preferenceConfig.readLoginStatus()){
+            if(preferenceConfig.isRider()){
+                Intent i = new Intent(LoginScreenActivity.this, RiderMainAcitivity.class);
+                i.putExtra("riderName", preferenceConfig.readFullName());
+                i.putExtra("riderPhone", preferenceConfig.readPhoneNumber());
+                startActivity(i);
+                finish();
+            }else{
+                Intent i = new Intent(LoginScreenActivity.this, DriverMainActivity.class);
+                i.putExtra("driverPhone", preferenceConfig.readPhoneNumber());
+                startActivity(i);
+                finish();
+            }
+        }
 
         if (Build.VERSION.SDK_INT >= 23) {
             permissionCheck();
@@ -129,7 +138,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                 if (user.equals("Rider")) {
                     RiderReg riderReg = snapshot.getValue(RiderReg.class);
 
-                    if (riderReg.password.toString().trim().equals(password)) {
+                    if (riderReg.password.trim().equals(password)) {
                         Toast.makeText(LoginScreenActivity.this, "Welcome rider:" + riderReg.fullName, Toast.LENGTH_SHORT).show();
 
                         //sending data to rider activity
@@ -138,6 +147,8 @@ public class LoginScreenActivity extends AppCompatActivity {
                         preferenceConfig.writeLoginStatus(true);
                         preferenceConfig.writePhoneNumber(riderReg.mobile);
                         preferenceConfig.writeFullName(riderReg.fullName);
+                        preferenceConfig.writeEmerNumb(riderReg.emergencyNumber);
+                        preferenceConfig.writeIsRider(true);
                         i.putExtra("riderName", riderReg.fullName);
                         i.putExtra("riderPhone", riderReg.mobile);
                         startActivity(i);
@@ -149,7 +160,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                 } else {
                     DriverReg driverReg = snapshot.getValue(DriverReg.class);
 
-                    if (driverReg.password.toString().trim().equals(password)) {
+                    if (driverReg.password.trim().equals(password)) {
                         Toast.makeText(LoginScreenActivity.this, "Welcome driver:" + driverReg.fullName, Toast.LENGTH_SHORT).show();
 
                         //sending data to driver activity
@@ -158,6 +169,8 @@ public class LoginScreenActivity extends AppCompatActivity {
                         preferenceConfig.writeLoginStatus(true);
                         preferenceConfig.writePhoneNumber(driverReg.mobile);
                         preferenceConfig.writeFullName(driverReg.fullName);
+                        preferenceConfig.writeIsRider(false);
+                        preferenceConfig.writeUPIId(driverReg.upiId);
                         i.putExtra("driverPhone", driverPhone);
                         startActivity(i);
                         finish();
@@ -176,5 +189,9 @@ public class LoginScreenActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+    }
 }

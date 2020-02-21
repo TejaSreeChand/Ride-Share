@@ -29,20 +29,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="80dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <fragment
                 android:id="@+id/autoCpmplete_source"
                 android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"/>
+                android:layout_marginBottom="16dp"
+                android:layout_weight="0.5" />
 
 
             <fragment
                 android:id="@+id/autoCpmplete_dest"
                 android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5" />
         </LinearLayout>
@@ -54,6 +55,16 @@
             android:layout_gravity="center"
             android:text="Search RIDE"
             android:textSize="18sp"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/acceptedRidesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See accepted rides"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
             app:backgroundTint="@color/colorPrimary" />
     </LinearLayout>
 

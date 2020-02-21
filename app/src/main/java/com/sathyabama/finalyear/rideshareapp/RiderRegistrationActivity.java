@@ -24,7 +24,7 @@ public class RiderRegistrationActivity extends AppCompatActivity {
     Button registerButton;
     EditText etName, etPhone, etPassword, etEmail, etAadhar, etGender, etEmergency;
 
-    GPSTracker gps;
+  //  GPSTracker gps;
     double latOfSensor = 0, lonOfSensor = 0;
     String latitude = "", longitude = "";
     final Handler ha = new Handler();
@@ -47,18 +47,18 @@ public class RiderRegistrationActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.button_register_rider);
 
         //getting gps data
-        gps = new GPSTracker(RiderRegistrationActivity.this);
-
-        // check if GPS enabled
-        if (gps.canGetLocation() && gps.getLatitude() != 0) {
-
-            latOfSensor = gps.getLatitude();
-            lonOfSensor = gps.getLongitude();
-
-
-        } else {
-            gps.showSettingsAlert();
-        }
+//        gps = new GPSTracker(RiderRegistrationActivity.this);
+//
+//        // check if GPS enabled
+//        if (gps.canGetLocation() && gps.getLatitude() != 0) {
+//
+//            latOfSensor = gps.getLatitude();
+//            lonOfSensor = gps.getLongitude();
+//
+//
+//        } else {
+//            gps.showSettingsAlert();
+//        }
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -73,25 +73,24 @@ public class RiderRegistrationActivity extends AppCompatActivity {
                 aadhar = etAadhar.getText().toString().trim();
                 emergencyNumber = etEmergency.getText().toString();
                 email = etEmail.getText().toString().trim();
-                if (latOfSensor == 0) {
-                    gps.showSettingsAlert();
-                    Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
-                    Log.e("Error", "location error1");
-                } else {
-                    latitude = String.valueOf(latOfSensor);
-                    longitude = String.valueOf(lonOfSensor);
-                }
+//                if (latOfSensor == 0) {
+//                    gps.showSettingsAlert();
+//                    Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
+//                    Log.e("Error", "location error1");
+//                } else {
+//                    latitude = String.valueOf(latOfSensor);
+//                    longitude = String.valueOf(lonOfSensor);
+//                }
 
 
                 if (fullName.equals("") || password.equals("") ||
-                        phoneNumber.equals("") || gender.equals("") |
-                        latitude.equals("") || longitude.equals("")) {
+                        phoneNumber.equals("") || gender.equals("")) {
 
-                    if (latitude.equals("") || longitude.equals("")) {
-                        Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_SHORT).show();
-                    }
+//                    if (latitude.equals("") || longitude.equals("")) {
+//                        Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG).show();
+//                    } else {
+                       Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_SHORT).show();
+//                    }
 
                 } else {
                     DatabaseReference myRef = database.getReference("Rider").child(phoneNumber);
@@ -112,7 +111,7 @@ public class RiderRegistrationActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        locationThread();
+        //locationThread();
     }
 
     @Override
@@ -131,38 +130,38 @@ public class RiderRegistrationActivity extends AppCompatActivity {
 
     }
 
-
-    public void locationThread() {
-        gps = new GPSTracker(RiderRegistrationActivity.this);
-
-        ha.postDelayed(new Runnable() {
-
-            @SuppressLint("NewApi")
-            @Override
-            public void run() {
-                //call function
-                if (gps.getLocation() == null) {
-                    gps.showSettingsAlert();
-                } else {
-
-                    // check if GPS enabled
-                    if (gps.canGetLocation() && gps.getLatitude() != 0) {
-                        latOfSensor = gps.getLatitude();
-                        lonOfSensor = gps.getLongitude();
-                        Toast.makeText(getApplicationContext(), "Location found!", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        // can't get location
-                        // GPS or Network is not enabled
-                        // Ask user to enable GPS/network in settings
-                        gps.showSettingsAlert();
-                    }
-                    if (gps.getLatitude() == 0)
-                        ha.postDelayed(this, 3000);
-                }
-            }
-
-        }, 3000);
-
-    }
+//
+//    public void locationThread() {
+//        gps = new GPSTracker(RiderRegistrationActivity.this);
+//
+//        ha.postDelayed(new Runnable() {
+//
+//            @SuppressLint("NewApi")
+//            @Override
+//            public void run() {
+//                //call function
+//                if (gps.getLocation() == null) {
+//                    gps.showSettingsAlert();
+//                } else {
+//
+//                    // check if GPS enabled
+//                    if (gps.canGetLocation() && gps.getLatitude() != 0) {
+//                        latOfSensor = gps.getLatitude();
+//                        lonOfSensor = gps.getLongitude();
+//                        Toast.makeText(getApplicationContext(), "Location found!", Toast.LENGTH_SHORT).show();
+//
+//                    } else {
+//                        // can't get location
+//                        // GPS or Network is not enabled
+//                        // Ask user to enable GPS/network in settings
+//                        gps.showSettingsAlert();
+//                    }
+//                    if (gps.getLatitude() == 0)
+//                        ha.postDelayed(this, 3000);
+//                }
+//            }
+//
+//        }, 3000);
+//
+//    }
 }

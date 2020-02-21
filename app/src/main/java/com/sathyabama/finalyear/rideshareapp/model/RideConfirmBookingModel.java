@@ -1,34 +1,39 @@
 package com.sathyabama.finalyear.rideshareapp.model;
 
-public class RideBookingModel {
-    private String fullName;
+public class RideConfirmBookingModel {
+    private String riderName;
     private Double currentLat;
     private Double currentLong;
     private Double destLat;
     private Double destLong;
     private String phoneNum;
     private String time;
+    private String price;
+    private String upiID;
+    private String driverName;
 
-
-    public RideBookingModel() {
+    public RideConfirmBookingModel() {
     }
 
-    public RideBookingModel(String fullName, Double currentLat, Double currentLong, Double destLat, Double destLong, String phoneNum, String time) {
-        this.fullName = fullName;
+    public RideConfirmBookingModel(String riderName, Double currentLat, Double currentLong, Double destLat, Double destLong, String phoneNum, String time, String price, String upiID, String driverName) {
+        this.riderName = riderName;
         this.currentLat = currentLat;
         this.currentLong = currentLong;
         this.destLat = destLat;
         this.destLong = destLong;
         this.phoneNum = phoneNum;
         this.time = time;
+        this.price = price;
+        this.upiID = upiID;
+        this.driverName = driverName;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getRiderName() {
+        return riderName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setRiderName(String riderName) {
+        this.riderName = riderName;
     }
 
     public Double getCurrentLat() {
@@ -77,5 +82,29 @@ public class RideBookingModel {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getUpiID() {
+        return upiID;
+    }
+
+    public void setUpiID(String upiID) {
+        this.upiID = upiID;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
     }
 }

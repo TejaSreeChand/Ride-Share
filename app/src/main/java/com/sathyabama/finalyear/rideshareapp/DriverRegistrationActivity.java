@@ -25,7 +25,7 @@ public class DriverRegistrationActivity extends AppCompatActivity {
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     Button registerButton;
     EditText etName, etPhone, etEmail, etPassword, etAge, etVehicleNum;
-    EditText etMaker, etLic, etAadhar, etNoOfSeats, etGender;
+    EditText etMaker, etLic, etAadhar, etNoOfSeats, etGender, etUpi;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
 
@@ -54,7 +54,7 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         etMaker = findViewById(R.id.et_vehicle_maker);
         etNoOfSeats = findViewById(R.id.et_no_of_seats);
         etGender = findViewById(R.id.et_gender_driver);
-
+        etUpi = findViewById(R.id.et_upi_id);
 
         radioGroup = findViewById(R.id.radio);
         registerButton = findViewById(R.id.button_register_driver);
@@ -137,7 +137,7 @@ public class DriverRegistrationActivity extends AppCompatActivity {
                 } else {
                     DatabaseReference myRef = database.getReference("Driver").child(phoneNumber);
                     DriverReg driver = new DriverReg(fullName, email, password, phoneNumber, age,
-                            vehicleNumber, maker, "yes", licNo, aadharNum, noOfSeats, gender);
+                            vehicleNumber, maker, "yes", licNo, aadharNum, noOfSeats, gender, etUpi.getText().toString());
                     myRef.setValue(driver);
                     Toast.makeText(DriverRegistrationActivity.this, "Successful Registration", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(DriverRegistrationActivity.this, LoginScreenActivity.class));

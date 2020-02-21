@@ -1,7 +1,8 @@
-package com.sathyabama.finalyear.rideshareapp.map;
+package com.sathyabama.finalyear.rideshareapp.views;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -36,6 +37,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sathyabama.finalyear.rideshareapp.R;
+import com.sathyabama.finalyear.rideshareapp.RiderAcceptedRides;
 import com.sathyabama.finalyear.rideshareapp.model.RideBookingModel;
 import com.sathyabama.finalyear.rideshareapp.utils.PreferenceConfig;
 
@@ -46,19 +48,19 @@ import java.util.Arrays;
 import static androidx.constraintlayout.solver.SolverVariable.Type.CONSTANT;
 
 
-public class SelectFromMapActivity extends AppCompatActivity {
+public class RiderBookingActivity extends AppCompatActivity {
     //    implements LocationListener, OnMapReadyCallback {
     // private GoogleMap mMap;
-    private MarkerOptions place1, place2;
-    Button getDirection;
-    private Polyline currentPolyline;
-    //    MapView mMapView;
-    // private GoogleMap gMap;
-    private LocationManager locationManager;
-    private SupportMapFragment mapFragment;
-    private static final long MIN_TIME = 200;
-    private static final float MIN_DISTANCE = 100;
-    private String latitude, longitude;
+//    private MarkerOptions place1, place2;
+//    Button getDirection;
+//    private Polyline currentPolyline;
+//    //    MapView mMapView;
+//    // private GoogleMap gMap;
+//    private LocationManager locationManager;
+//    private SupportMapFragment mapFragment;
+//    private static final long MIN_TIME = 200;
+//    private static final float MIN_DISTANCE = 100;
+//    private String latitude, longitude;
     private PreferenceConfig preferenceConfig;
 
     ////////
@@ -66,51 +68,60 @@ public class SelectFromMapActivity extends AppCompatActivity {
     Double mSlat, mSlong, mDlat, mDlong;
     int mSource, mDestination;
     LatLng mSourceP, mDestP;
-    Button mSearchRide;
+    Button mSearchRide,btnCheckRides ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_activity);
         mSearchRide = findViewById(R.id.searchRide);
+
+        btnCheckRides = findViewById(R.id.acceptedRidesBtn);
 //        getDirection = findViewById(R.id.btnGetDirection);
 //        mMapView = findViewById(R.id.mapNearBy);
+        //mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
+//        googleMap = mapFragment.get();
+        //mMapView.getMapAsync(this);
+        //    mMapView.onCreate(savedInstanceState);
+        //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, RiderBookingActivity.this);
+        //  mMapView.onResume();
+        //        getDirection.setOnClickListener(new View.OnClickListener() {
+        ////            @Override
+        ////            public void onClick(View view) {
+        ////                if (latitude != null && longitude != null) {
+        ////                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        ////                    final DatabaseReference databaseReference = firebaseDatabase.getReference();
+        ////                    final DatabaseReference bookingRef = databaseReference.child("Booking");
+        ////                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        ////                    LocalDateTime now = LocalDateTime.now();
+        ////                    RideBookingModel rideBookingModel = new RideBookingModel(preferenceConfig.readFullName(), latitude, longitude, latitude, longitude, preferenceConfig.readPhoneNumber(), dtf.format(now));
+        ////                    bookingRef.child("bookings").setValue(rideBookingModel);
+        ////                }
+        ////            }
+        ////        });
         mSource = R.id.autoCpmplete_source;
         mDestination = R.id.autoCpmplete_dest;
         autoPlaces(mSource, "Source");
         autoPlaces(mDestination, "Destination");
-        mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
-//        googleMap = mapFragment.get();
-        //mMapView.getMapAsync(this);
+
         preferenceConfig = new PreferenceConfig(getApplicationContext());
-        //    mMapView.onCreate(savedInstanceState);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        //    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, SelectFromMapActivity.this);
-        //  mMapView.onResume();
         mSearchRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchRide();
             }
         });
-//        getDirection.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (latitude != null && longitude != null) {
-//                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//                    final DatabaseReference databaseReference = firebaseDatabase.getReference();
-//                    final DatabaseReference bookingRef = databaseReference.child("Booking");
-//                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-//                    LocalDateTime now = LocalDateTime.now();
-//                    RideBookingModel rideBookingModel = new RideBookingModel(preferenceConfig.readFullName(), latitude, longitude, latitude, longitude, preferenceConfig.readPhoneNumber(), dtf.format(now));
-//                    bookingRef.child("bookings").setValue(rideBookingModel);
-//                }
-//            }
-//        });
 
+        btnCheckRides.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), RiderAcceptedRides.class));
+            }
+        });
 
     }
 
@@ -150,10 +161,9 @@ public class SelectFromMapActivity extends AppCompatActivity {
     public void searchRide() {
         if (mSourceP == null) {
             Toast.makeText(this, "Enter Source Location", Toast.LENGTH_SHORT).show();
-        } else if (mSourceP == null) {
+        } else if (mDestP == null) {
             Toast.makeText(this, "Enter Destination Location", Toast.LENGTH_SHORT).show();
         } else {
-
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             final DatabaseReference databaseReference = firebaseDatabase.getReference();
             final DatabaseReference bookingRef = databaseReference.child("Booking");

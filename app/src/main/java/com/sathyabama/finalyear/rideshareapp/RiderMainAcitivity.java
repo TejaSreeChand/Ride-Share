@@ -1,7 +1,10 @@
 package com.sathyabama.finalyear.rideshareapp;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sathyabama.finalyear.rideshareapp.map.SelectFromMapActivity;
+import com.sathyabama.finalyear.rideshareapp.utils.PreferenceConfig;
+import com.sathyabama.finalyear.rideshareapp.views.RiderBookingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +31,7 @@ import java.util.List;
 
 public class RiderMainAcitivity extends AppCompatActivity {
     TextView tvRiderName, tvRiderMobile;
-    Button btnDriversMap, btnSendReq;
+    Button btnDriversMap, btnSendReq, emergencyBtn;
 
     DatabaseReference databaseReference;
 
@@ -47,16 +51,32 @@ public class RiderMainAcitivity extends AppCompatActivity {
         setContentView(R.layout.activity_rider_main);
         tvRiderName = (TextView) findViewById(R.id.tv_rider_name);
         tvRiderMobile = (TextView) findViewById(R.id.tv_rider_mobile);
-       // btnDriversMap = (Button) findViewById(R.id.button_see_map);
+        // btnDriversMap = (Button) findViewById(R.id.button_see_map);
         btnSendReq = (Button) findViewById(R.id.button_request_ride);
         //retrieving phone data
         final String riderName = getIntent().getExtras().getString("riderName", null);
         final String riderPhone = getIntent().getExtras().getString("riderPhone", null);
-
-
+        final PreferenceConfig preferenceConfig = new PreferenceConfig(getApplicationContext());
+        emergencyBtn = findViewById(R.id.emer_btn);
         tvRiderName.setText(riderName);
         tvRiderMobile.setText(riderPhone);
-
+        emergencyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + preferenceConfig.readEmerNum()));
+                if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    Activity#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for Activity#requestPermissions for more details.
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
 //        btnDriversMap.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -70,7 +90,7 @@ public class RiderMainAcitivity extends AppCompatActivity {
         btnSendReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RiderMainAcitivity.this, SelectFromMapActivity.class);
+                Intent i = new Intent(RiderMainAcitivity.this, RiderBookingActivity.class);
                 i.putExtra("riderName", riderName);
                 i.putExtra("riderPhone", riderPhone);
                 startActivity(i);

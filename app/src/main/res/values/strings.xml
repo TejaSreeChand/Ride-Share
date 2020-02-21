@@ -62,4 +62,13 @@
         <item>Debit Account</item>
         <item>Credit Credit</item>
     </string-array>
+    <string name="title_activity_driver_main_tabbed">DriverActivityMainTabbed</string>
+    <string name="tab_text_1">Available rides</string>
+    <string name="tab_text_2">Booked rides</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pref_is_rider">is_rider</string>
+    <string name="pref_upi_id">upi_id</string>
+    <string name="pref_emer_numb">emer_num</string>
 </resources>

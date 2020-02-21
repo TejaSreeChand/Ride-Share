@@ -32,6 +32,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.android.libraries.places:places:2.2.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    //
+    implementation 'com.shreyaspatil:EasyUpiPayment:2.0'
     //list view
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
@@ -39,6 +42,9 @@ dependencies {
     //map
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

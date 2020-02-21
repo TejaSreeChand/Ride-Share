@@ -17,11 +17,12 @@ public class DriverReg {
     public String aadharNum;
     public String noOfSeats;
     public String gender;
+    public String upiId;
 
     public DriverReg() {
     }
 
-    public DriverReg(String fullName, String email, String password, String mobile, String age, String regNo, String maker, String acStatus, String licNo, String aadharNum, String noOfSeats, String gender) {
+    public DriverReg(String fullName, String email, String password, String mobile, String age, String regNo, String maker, String acStatus, String licNo, String aadharNum, String noOfSeats, String gender, String upiId) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
@@ -34,6 +35,7 @@ public class DriverReg {
         this.aadharNum = aadharNum;
         this.noOfSeats = noOfSeats;
         this.gender = gender;
+        this.upiId = upiId;
     }
 
     public String getFullName() {
@@ -130,6 +132,14 @@ public class DriverReg {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getUpiId() {
+        return upiId;
+    }
+
+    public void setUpiId(String upiId) {
+        this.upiId = upiId;
     }
 }
 

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content">
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <EditText
@@ -74,6 +77,12 @@
         android:layout_margin="5dp"
         android:hint="Aadhar Number" />
     <EditText
+        android:id="@+id/et_upi_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Upi id" />
+    <EditText
         android:id="@+id/et_no_of_seats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -122,3 +131,4 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:textAllCaps="false" />
 </LinearLayout>
+</ScrollView>
