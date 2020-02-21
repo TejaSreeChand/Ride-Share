@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class RiderMainAcitivity extends AppCompatActivity {
     TextView tvRiderName, tvRiderMobile;
-    Button btnDriversMap, btnSendReq, emergencyBtn;
+    Button btnDriversMap, btnSendReq, emergencyBtn, logoutBtn;
 
     DatabaseReference databaseReference;
 
@@ -51,7 +52,7 @@ public class RiderMainAcitivity extends AppCompatActivity {
         setContentView(R.layout.activity_rider_main);
         tvRiderName = (TextView) findViewById(R.id.tv_rider_name);
         tvRiderMobile = (TextView) findViewById(R.id.tv_rider_mobile);
-        // btnDriversMap = (Button) findViewById(R.id.button_see_map);
+       logoutBtn = findViewById(R.id.logout);
         btnSendReq = (Button) findViewById(R.id.button_request_ride);
         //retrieving phone data
         final String riderName = getIntent().getExtras().getString("riderName", null);
@@ -72,21 +73,20 @@ public class RiderMainAcitivity extends AppCompatActivity {
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for Activity#requestPermissions for more details.
+                    ActivityCompat.requestPermissions(RiderMainAcitivity.this,new String[]{Manifest.permission.CALL_PHONE},2);
+                    startActivity(intent);
                     return;
                 }
                 startActivity(intent);
             }
         });
-//        btnDriversMap.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(RiderMainAcitivity.this, ShowDriversMap.class);
-//                i.putExtra("riderName", riderName);
-//                i.putExtra("riderPhone", riderPhone);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                preferenceConfig.writeLoginStatus(false);
+                startActivity(new Intent(getApplicationContext(),LoginScreenActivity.class));
+            }
+        });
         btnSendReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

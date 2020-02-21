@@ -171,6 +171,7 @@ public class RiderBookingActivity extends AppCompatActivity {
             LocalDateTime now = LocalDateTime.now();
             RideBookingModel rideBookingModel = new RideBookingModel(preferenceConfig.readFullName(), mSourceP.latitude, mSourceP.longitude, mDestP.latitude, mDestP.longitude, preferenceConfig.readPhoneNumber(), dtf.format(now));
             bookingRef.child(preferenceConfig.readPhoneNumber()).setValue(rideBookingModel);
+            Toast.makeText(getApplicationContext(),"Search request send to all drivers",Toast.LENGTH_LONG).show();
         }
 
 //    @Override

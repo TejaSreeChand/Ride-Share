@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class DriverMainActivity extends AppCompatActivity {
     private RecyclerView bookingReqRV;
     private ArrayList<RideBookingModel> bookingModelArrayList = new ArrayList<>();
     private FloatingActionButton floatingActionButton;
+    private Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,19 +41,7 @@ public class DriverMainActivity extends AppCompatActivity {
         bookingReqRV = findViewById(R.id.driverBookedRecyclerView);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         final PreferenceConfig preferenceConfig = new PreferenceConfig(getApplicationContext());
-
-//        DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("Driver").child(preferenceConfig.readPhoneNumber());
-//        driverRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                preferenceConfig.writeUPIId(dataSnapshot.child("upi").getValue());
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+        logout = findViewById(R.id.logoutDriver);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Driver").child(preferenceConfig.readPhoneNumber()).child("currentBookings");
         databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -76,6 +66,14 @@ public class DriverMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),AvailableRides.class));
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                preferenceConfig.writeLoginStatus(false);
+                startActivity(new Intent(getApplicationContext(),LoginScreenActivity.class));
             }
         });
     }
